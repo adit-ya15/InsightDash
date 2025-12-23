@@ -1,9 +1,24 @@
 import React from 'react'
+import "./single.scss"
+import Sidebar from '../../components/sidebar/Sidebar'
+import Navbar from '../../components/navbar/Navbar'
 
 const Single = () => {
   return (
-    <div>
-      Single
+    <div className='single'>
+      <Sidebar/>
+      <div className="singleContainer">
+        <Navbar/>
+        <div className="left">
+
+        </div>
+        <div className="right">
+
+        </div>
+        <div className="bottom">
+          
+        </div>
+      </div>
     </div>
   )
 }
