@@ -9,8 +9,9 @@ import {
     systemHealthColumns, systemHealthRows,
     logColumns, logRows
 } from "../../datatablesource";
+import { SearchContext } from "../../context/SearchContext";
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 const Datatable = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const Datatable = () => {
 
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
+  const { searchQuery } = useContext(SearchContext);
   
   useEffect(() => {
     switch(path) {
@@ -59,6 +61,14 @@ const Datatable = () => {
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+  
+  // Filter data based on search query
+  const filteredData = data.filter((item) => {
+      if (!searchQuery) return true;
+      return Object.values(item).some(
+        val => String(val).toLowerCase().includes(searchQuery.toLowerCase())
+      );
+  });
 
   const actionColumn = [
     {
@@ -93,7 +103,7 @@ const Datatable = () => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
+        rows={filteredData}
         columns={columns.length > 0 ? columns.concat(actionColumn) : []}
         pageSize={9}
         rowsPerPageOptions={[9]}

@@ -6,12 +6,23 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-import { DarkModeContext } from "../../context/darkModeContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { DarkModeContext } from "../../context/darkModeContext";
+import { SearchContext } from "../../context/SearchContext";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const { dispatch: searchDispatch } = useContext(SearchContext);
+  const [language, setLanguage] = useState("English");
+
+  const handleSearch = (e) => {
+    searchDispatch({ type: "SET_SEARCH", payload: e.target.value });
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === "English" ? "Spanish" : "English");
+  };
 
   const handleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -27,13 +38,17 @@ const Navbar = () => {
     <div className="navbar">
       <div className="wrapper">
         <div className="search">
-          <input type="text" placeholder="Search..." />
+          <input 
+            type="text" 
+            placeholder="Search..." 
+            onChange={handleSearch}
+          />
           <SearchOutlinedIcon />
         </div>
         <div className="items">
-          <div className="item">
+          <div className="item" onClick={toggleLanguage} style={{ cursor: "pointer" }}>
             <LanguageOutlinedIcon className="icon" />
-            English
+            {language}
           </div>
           <div className="item">
             <DarkModeOutlinedIcon
