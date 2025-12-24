@@ -56,6 +56,7 @@ function App() {
              <Route path="delivery" element={<List />} />
              <Route path="stats" element={<Stats />} />
              <Route path="notifications" element={<List />} />
+             <Route path="messages" element={<List />} />
              <Route path="system-health" element={<List />} />
              <Route path="logs" element={<List />} />
              <Route path="settings" element={<Settings />} />

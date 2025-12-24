@@ -2,13 +2,9 @@
     background-color: #111;
     color: rgb(156, 156, 156);
 
-    // Apply background to the main content container specifically
     .home .homeContainer {
         background-color: #111;
     }
-
-    // Also apply to other pages content containers if they exist or just rely on body
-    // But .homeContainer was the specific issue
 
     .chartGrid {
         stroke: rgba(228, 228, 228, 0.219);
@@ -66,24 +62,101 @@
             color: gray;
             border: none;
 
+            &.MuiDataGrid-root {
+                background-color: #111;
+                border: 1px solid #333;
+            }
+
+            // --- HEADER NUCLEAR FIX ---
             .MuiDataGrid-columnHeaders {
-                background-color: #181818;
-                color: #ccc;
+                background-color: #000 !important;
+                background: #000 !important;
                 border-bottom: 1px solid #333;
             }
 
+            // Force every single element inside the header to be black
+            .MuiDataGrid-columnHeaders * {
+                background-color: #000 !important;
+                background: #000 !important;
+            }
+
+            .MuiDataGrid-columnHeader {
+                color: #eee !important;
+            }
+
+            // --------------------------
+
+            // Filler / Right gap fix
+            .MuiDataGrid-filler {
+                background-color: #000 !important;
+            }
+
+            .MuiDataGrid-virtualScroller {
+                background-color: #111 !important;
+            }
+
+            .MuiDataGrid-overlay {
+                background-color: #111 !important;
+                background: #111 !important;
+                color: #ccc !important;
+            }
+
             .MuiDataGrid-row {
-                background-color: #111;
+                background-color: #181818;
                 color: #ccc;
+                border-bottom: 1px solid #222;
 
                 &:hover {
-                    background-color: #222;
+                    background-color: #252525;
+                }
+
+                &.Mui-selected {
+                    background-color: rgba(255, 255, 255, 0.08);
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.12);
+                    }
                 }
             }
 
             .MuiDataGrid-footerContainer {
-                background-color: #181818;
+                background-color: #000 !important;
                 border-top: 1px solid #333;
+                color: gray;
+
+                .MuiTablePagination-root {
+                    color: gray;
+                }
+
+                .MuiTablePagination-selectIcon {
+                    color: gray;
+                }
+            }
+
+            .MuiCheckbox-root {
+                color: gray;
+
+                &.Mui-checked {
+                    color: teal;
+                }
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #111;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #444;
+                border-radius: 5px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
             }
 
             .viewButton {
@@ -93,7 +166,6 @@
         }
     }
 
-    // Deep Dark Mode for Components
     .widget,
     .chart,
     .featured,
