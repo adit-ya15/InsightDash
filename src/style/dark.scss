@@ -2,6 +2,14 @@
     background-color: #111;
     color: rgb(156, 156, 156);
 
+    // Apply background to the main content container specifically
+    .home .homeContainer {
+        background-color: #111;
+    }
+
+    // Also apply to other pages content containers if they exist or just rely on body
+    // But .homeContainer was the specific issue
+
     .chartGrid {
         stroke: rgba(228, 228, 228, 0.219);
     }
@@ -17,6 +25,7 @@
     .navbar {
         color: #999;
         border-color: #333;
+        background-color: #111;
 
         .search {
             border-color: gray;
@@ -51,20 +60,82 @@
     }
 
     .datatable {
+        background-color: #111;
+
         .datagrid {
             color: gray;
             border: none;
 
-            .viewButton,
-            .deleteButton,
-            .cellWithStatus {
-                color: gray;
-                border: none;
+            .MuiDataGrid-columnHeaders {
+                background-color: #181818;
+                color: #ccc;
+                border-bottom: 1px solid #333;
             }
+
+            .MuiDataGrid-row {
+                background-color: #111;
+                color: #ccc;
+
+                &:hover {
+                    background-color: #222;
+                }
+            }
+
+            .MuiDataGrid-footerContainer {
+                background-color: #181818;
+                border-top: 1px solid #333;
+            }
+
+            .viewButton {
+                color: #ccc;
+                border-color: #ccc;
+            }
+        }
+    }
+
+    // Deep Dark Mode for Components
+    .widget,
+    .chart,
+    .featured,
+    .listContainer {
+        background-color: #181818;
+        border: 1px solid #333;
+        box-shadow: none;
+        color: #ccc;
+
+        .title {
+            color: #ccc;
+        }
+
+        .top,
+        .bottom {
+            color: #ccc;
+        }
+
+        .amount {
+            color: #ccc;
+        }
+
+        .counter {
+            color: white;
+        }
+
+        .link {
+            color: #888;
+            border-bottom: 1px solid #555;
+        }
+    }
+
+    .table {
+        background-color: transparent !important;
+
+        .tableCell {
+            color: #ccc !important;
         }
     }
 
     input {
         background-color: transparent;
+        color: white;
     }
 }

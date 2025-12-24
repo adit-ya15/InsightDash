@@ -1,0 +1,108 @@
+.settings {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+
+    .settingsContainer {
+        flex: 1;
+        background-color: var(--bg-color);
+
+        .content {
+            padding: 20px;
+
+            .title {
+                margin-bottom: 20px;
+                color: gray;
+            }
+
+            .section {
+                margin-bottom: 30px;
+                padding: 20px;
+                -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+                box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+                border-radius: 10px;
+
+                h2 {
+                    margin-bottom: 20px;
+                    font-size: 18px;
+                    color: gray;
+                }
+
+                .formGroup {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 15px;
+
+                    label {
+                        margin-bottom: 5px;
+                        font-size: 14px;
+                        color: gray;
+                    }
+
+                    input {
+                        padding: 10px;
+                        border: 1px solid gray;
+                        border-radius: 5px;
+                    }
+                }
+
+                .toggleOption {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 15px;
+                    width: 300px;
+
+                    span {
+                        color: gray;
+                    }
+                }
+            }
+
+            .saveButton {
+                padding: 10px 20px;
+                background-color: teal;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.app.dark {
+    .settings {
+        .settingsContainer {
+            background-color: #111;
+
+            .content {
+                .section {
+                    background-color: #181818;
+                    border: 1px solid #333;
+                    box-shadow: none;
+
+                    h2 {
+                        color: #ccc;
+                    }
+
+                    .formGroup label {
+                        color: #ccc;
+                    }
+
+                    .toggleOption span {
+                        color: #ccc;
+                    }
+
+                    input[type="email"],
+                    input[type="password"] {
+                        background-color: transparent;
+                        color: white;
+                        border-color: #555;
+                    }
+                }
+            }
+        }
+    }
+}

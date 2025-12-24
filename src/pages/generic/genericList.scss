@@ -1,0 +1,19 @@
+.genericList {
+    display: flex;
+
+    .listContainer {
+        flex: 6;
+
+        .content {
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+            color: gray;
+
+            h1 {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

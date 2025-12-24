@@ -1,5 +1,6 @@
 .datatable {
-    height: 600px;
+    // height: 600px; // Remove fixed height
+    min-height: 600px;
     padding: 20px;
 
     .datatableTitle {
@@ -39,6 +40,8 @@
     .cellWithStatus {
         padding: 5px;
         border-radius: 5px;
+        width: 80px;
+        text-align: center;
 
         &.active {
             background-color: rgba(0, 128, 0, 0.05);
@@ -62,19 +65,31 @@
         gap: 15px;
 
         .viewButton {
-            padding: 2px 5px;
+            padding: 2px 10px;
             border-radius: 5px;
-            color: darkblue;
-            border: 1px dotted rgba(0, 0, 139, 0.596);
+            color: #7451f8;
+            border: 1px solid #7451f8;
             cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: #7451f8;
+                color: white;
+            }
         }
 
         .deleteButton {
-            padding: 2px 5px;
+            padding: 2px 10px;
             border-radius: 5px;
             color: crimson;
-            border: 1px dotted rgba(220, 20, 60, 0.6);
+            border: 1px solid crimson;
             cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: crimson;
+                color: white;
+            }
         }
     }
 }

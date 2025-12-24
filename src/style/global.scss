@@ -1,0 +1,54 @@
+:root {
+    --main-color: teal;
+    --bg-color: white;
+    --text-color: #555;
+    --border-color: #ddd;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: 'Nunito', sans-serif;
+    scroll-behavior: smooth;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+// Media Queries Breakpoints
+// Mobile: max-width 480px
+// Tablet: max-width 768px
+// Laptop: max-width 1024px
+
+.app {
+    // display: flex; // Removed to allow full width block layout for children
+    width: 100%;
+    min-height: 100vh;
+}

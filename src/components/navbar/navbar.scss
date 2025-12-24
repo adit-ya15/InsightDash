@@ -1,57 +1,74 @@
-.navbar{
+.navbar {
     height: 50px;
-    border-bottom: 0.5px solid rgb(231,228, 228);
+    border-bottom: 0.5px solid var(--border-color);
     display: flex;
     align-items: center;
     font-size: 14px;
-    color: #555;
+    color: var(--text-color);
+    background-color: var(--bg-color);
 
-    .wrapper{
+    .wrapper {
         width: 100%;
         padding: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        .search{
+        .search {
             display: flex;
             align-items: center;
             border: 0.5px solid lightgray;
             padding: 3px;
+            border-radius: 5px;
 
-            input{
+            input {
                 border: none;
                 outline: none;
                 background-color: transparent;
 
-                &::placeholder{
+                &::placeholder {
                     font-size: 12px;
                 }
             }
         }
 
-        .items{
+        .items {
             display: flex;
             align-items: center;
 
-            .item{
+            .item {
                 display: flex;
                 align-items: center;
                 margin-right: 20px;
                 position: relative;
+                cursor: pointer;
+
+                // Hide text/less important icons on mobile
+                @media screen and (max-width: 480px) {
+                    display: none;
+                }
+
+                // Show only avatar and notification on mobile?
+                &:last-child,
+                &:nth-last-child(2) {
+                    @media screen and (max-width: 480px) {
+                        display: flex;
+                    }
+                }
             }
 
-            .icon{
+            .icon {
                 font-size: 20px;
             }
 
-            .avatar{
+            .avatar {
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
+                object-fit: cover;
             }
 
-            .counter{
+            .counter {
                 width: 15px;
                 height: 15px;
                 background-color: red;
