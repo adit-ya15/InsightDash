@@ -12,9 +12,12 @@ import { OrderContext } from "../../context/OrderContext";
 import { DeliveryContext } from "../../context/DeliveryContext";
 
 import { useLanguage } from "../../context/LanguageContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Single = () => {
   const location = useLocation();
+  const { currentUser } = useContext(AuthContext);
+  const isUserRole = currentUser?.role === "user";
   const { userId, productId, notificationId } = useParams(); 
   const path = location.pathname.split("/")[1]; 
   const { t } = useLanguage();
@@ -83,7 +86,7 @@ const Single = () => {
 
   return (
     <div className='single'>
-      <Sidebar />
+      {!isUserRole && <Sidebar />}
       <div className="singleContainer">
         <Navbar />
         <div className="top">

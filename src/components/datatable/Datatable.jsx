@@ -1,13 +1,13 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import {
-    userColumns,
-    productColumns,
-    orderColumns,
-    deliveryColumns,
-    notificationColumns, notificationRows,
-    systemHealthColumns, systemHealthRows,
-    logColumns, logRows
+  userColumns,
+  productColumns,
+  orderColumns,
+  deliveryColumns,
+  notificationColumns, notificationRows,
+  systemHealthColumns, systemHealthRows,
+  logColumns, logRows
 } from "../../datatablesource";
 
 import { Link, useLocation } from "react-router-dom";
@@ -51,30 +51,30 @@ const Datatable = () => {
       deleteFunc = deleteOrder;
       break;
     case "delivery":
-        columns = deliveryColumns;
-        data = delivery;
-        deleteFunc = deleteDelivery;
-        break;
+      columns = deliveryColumns;
+      data = delivery;
+      deleteFunc = deleteDelivery;
+      break;
     case "notifications":
-        columns = notificationColumns;
-        data = notificationRows;
-        deleteFunc = () => {};
-        break;
+      columns = notificationColumns;
+      data = notificationRows;
+      deleteFunc = () => { };
+      break;
     case "system-health":
-        columns = systemHealthColumns;
-        data = systemHealthRows;
-        deleteFunc = () => {};
-        break;
+      columns = systemHealthColumns;
+      data = systemHealthRows;
+      deleteFunc = () => { };
+      break;
     case "logs":
-        columns = logColumns;
-        data = logRows;
-        deleteFunc = () => {};
-        break;
-     case "messages":
-        columns = []; // Placeholder
-        data = [];
-        deleteFunc = () => {};
-        break;
+      columns = logColumns;
+      data = logRows;
+      deleteFunc = () => { };
+      break;
+    case "messages":
+      columns = []; // Placeholder
+      data = [];
+      deleteFunc = () => { };
+      break;
     default:
       columns = [];
       data = [];
@@ -82,28 +82,28 @@ const Datatable = () => {
 
   useEffect(() => {
     if (currentUser?.role === "user" && path === "orders") {
-        setList(data.filter(item => item.userId === currentUser.id));
+      setList(data.filter(item => item.userId === currentUser.id));
     } else {
-        setList(data);
+      setList(data);
     }
   }, [data, currentUser, path]);
 
   const handleDelete = (id) => {
-    switch(path) {
-        case "users":
-            deleteUser(id);
-            break;
-        case "products":
-            deleteProduct(id);
-            break;
-        case "orders":
-            deleteOrder(id);
-            break;
-        case "delivery":
-            deleteDelivery(id);
-            break;
-        default:
-            break;
+    switch (path) {
+      case "users":
+        deleteUser(id);
+        break;
+      case "products":
+        deleteProduct(id);
+        break;
+      case "orders":
+        deleteOrder(id);
+        break;
+      case "delivery":
+        deleteDelivery(id);
+        break;
+      default:
+        break;
     }
   };
 
@@ -115,17 +115,19 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            {!["logs", "system-health"].includes(path) && (
+            {!["logs", "system-health"].includes(path) && currentUser?.role !== "user" && (
               <Link to={`/${path}/${params.row.id}`} style={{ textDecoration: "none" }}>
                 <div className="viewButton">{t("datatable_view")}</div>
               </Link>
             )}
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              {t("datatable_delete")}
-            </div>
+            {currentUser?.role !== "user" && (
+              <div
+                className="deleteButton"
+                onClick={() => handleDelete(params.row.id)}
+              >
+                {t("datatable_delete")}
+              </div>
+            )}
           </div>
         );
       },
@@ -136,7 +138,7 @@ const Datatable = () => {
     <div className="datatable">
       <div className="datatableTitle">
         {path.toUpperCase()}
-        {!["notifications", "logs", "system-health", "messages"].includes(path) && (
+        {!["notifications", "logs", "system-health", "messages"].includes(path) && currentUser?.role !== "user" && (
           <Link to={`/${path}/new`} className="link">
             {t("datatable_add_new")}
           </Link>
@@ -144,8 +146,8 @@ const Datatable = () => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
-        columns={columns.concat(actionColumn)}
+        rows={list}
+        columns={currentUser?.role === "user" ? columns : columns.concat(actionColumn)}
         pageSize={1}
         rowsPerPageOptions={[1]}
         checkboxSelection

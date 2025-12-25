@@ -92,8 +92,8 @@ export const productRows = Array.from({ length: 60 }, (_, i) => ({
 // Orders
 export const orderColumns = [
     { field: "id", headerName: "Order ID", width: 100 },
-    { field: "product", headerName: "Product", width: 200 },
-    { field: "customer", headerName: "Customer", width: 150 },
+    { field: "product", headerName: "Product", flex: 2, minWidth: 200 },
+    { field: "customer", headerName: "Customer", flex: 1, minWidth: 150 },
     { field: "date", headerName: "Date", width: 120 },
     { field: "amount", headerName: "Amount", width: 100 },
     { 

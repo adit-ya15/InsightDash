@@ -11,8 +11,11 @@ import { DeliveryContext } from "../../context/DeliveryContext";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useLanguage } from "../../context/LanguageContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const New = ({ inputs, title }) => {
+  const { currentUser } = useContext(AuthContext);
+  const isUser = currentUser?.role === "user";
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
   const { handleAdd: addUser } = useContext(UserContext);
@@ -79,7 +82,7 @@ const New = ({ inputs, title }) => {
 
   return (
     <div className="new">
-      <Sidebar />
+      {!isUser && <Sidebar />}
       <div className="newContainer">
         <Navbar />
         <div className="top">
