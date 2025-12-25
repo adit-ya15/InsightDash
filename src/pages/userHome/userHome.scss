@@ -1,58 +1,129 @@
 .userHome {
-    display: flex;
-
     .homeContainer {
-        flex: 6;
+        display: flex;
+        flex-direction: column;
 
         .hero {
-            padding: 50px;
-            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-            height: calc(100vh - 50px); // Subtract navbar height
-            color: white;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            padding: 30px;
+            background-color: #f5f5f5;
+
+            &.dark {
+                background-color: #111;
+            }
 
             .hero-content {
+                max-width: 1200px;
+                margin: 0 auto;
+
                 h1 {
-                    font-size: 48px;
+                    font-size: 32px;
                     margin-bottom: 10px;
-                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                    color: #555;
                 }
 
                 p {
-                    font-size: 20px;
-                    margin-bottom: 40px;
+                    color: gray;
+                    margin-bottom: 30px;
+                    font-size: 16px;
                 }
 
-                .cards {
+                .summaryCards {
                     display: flex;
                     gap: 20px;
-                    justify-content: center;
+                    margin-bottom: 30px;
+                    flex-wrap: wrap;
 
-                    .card {
-                        background: rgba(255, 255, 255, 0.2);
-                        backdrop-filter: blur(10px);
-                        padding: 30px;
-                        border-radius: 15px;
-                        width: 200px;
-                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                        transition: transform 0.3s;
-                        cursor: pointer;
-
-                        &:hover {
-                            transform: translateY(-5px);
-                            background: rgba(255, 255, 255, 0.3);
-                        }
+                    .summaryCard {
+                        flex: 1;
+                        padding: 20px;
+                        background-color: white;
+                        border-radius: 10px;
+                        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+                        min-width: 200px;
 
                         h3 {
+                            font-size: 14px;
+                            color: gray;
+                            text-transform: uppercase;
                             margin-bottom: 10px;
+                        }
+
+                        .value {
+                            font-size: 24px;
+                            font-weight: bold;
+                            color: #333;
+                        }
+                    }
+                }
+
+                .sectionTitle {
+                    font-size: 20px;
+                    color: gray;
+                    margin-bottom: 20px;
+                    margin-top: 30px;
+                }
+
+                .quickActions {
+                    display: flex;
+                    gap: 20px;
+                    flex-wrap: wrap;
+                    margin-top: 30px;
+
+                    .actionCard {
+                        padding: 15px 25px;
+                        background-color: white;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        color: #555;
+                        text-decoration: none;
+                        font-weight: 500;
+                        transition: all 0.2s;
+                        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+
+                        &:hover {
+                            background-color: #f0f0f0;
+                            transform: translateY(-2px);
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+// Dark Mode Overrides
+.app.dark .userHome .hero {
+    background-color: #111;
+
+    h1 {
+        color: #ccc;
+    }
+
+    .summaryCards .summaryCard {
+        background-color: #181818;
+        border: 1px solid #333;
+        box-shadow: none;
+
+        h3 {
+            color: #888;
+        }
+
+        .value {
+            color: white;
+        }
+    }
+
+    .sectionTitle {
+        color: #ccc;
+    }
+
+    .quickActions .actionCard {
+        background-color: #181818;
+        border-color: #333;
+        color: #ccc;
+
+        &:hover {
+            background-color: #252525;
         }
     }
 }

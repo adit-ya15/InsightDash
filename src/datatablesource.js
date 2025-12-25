@@ -114,6 +114,7 @@ const customerNames = ["John Smith", "Michael Doe", "Jane Doe", "Alice Johnson",
 
 export const orderRows = Array.from({ length: 60 }, (_, i) => ({
     id: 1143155 + i,
+    userId: Math.random() > 0.4 ? "user-1" : "admin-1", // 60% chance for user-1 to ensure data shows
     product: productTitles[Math.floor(Math.random() * productTitles.length)],
     customer: customerNames[Math.floor(Math.random() * customerNames.length)],
     date: randomDate(new Date(2023, 0, 1), new Date()),

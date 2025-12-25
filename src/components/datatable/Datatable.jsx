@@ -1,7 +1,7 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { 
-    userColumns, 
+import {
+    userColumns,
     productColumns,
     orderColumns,
     deliveryColumns,
@@ -12,61 +12,81 @@ import {
 
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../../context/userContext"
+import { UserContext } from "../../context/userContext";
 import { ProductContext } from "../../context/ProductContext";
 import { OrderContext } from "../../context/OrderContext";
 import { DeliveryContext } from "../../context/DeliveryContext";
 import { useLanguage } from "../../context/LanguageContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Datatable = () => {
+  const { t } = useLanguage();
   const location = useLocation();
   const path = location.pathname.split("/")[1];
+  const [list, setList] = useState([]);
 
-  const [data, setData] = useState([]);
-  const [columns, setColumns] = useState([]);
-  const { t } = useLanguage();
+  const { data: users, handleDelete: deleteUser } = useContext(UserContext);
+  const { data: products, handleDelete: deleteProduct } = useContext(ProductContext);
+  const { data: orders, handleDelete: deleteOrder } = useContext(OrderContext);
+  const { data: delivery, handleDelete: deleteDelivery } = useContext(DeliveryContext);
+  const { currentUser } = useContext(AuthContext);
 
-  const { data: userData, handleDelete: deleteUser } = useContext(UserContext);
-  const { data: productData, handleDelete: deleteProduct } = useContext(ProductContext);
-  const { data: orderData, handleDelete: deleteOrder } = useContext(OrderContext);
-  const { data: deliveryData, handleDelete: deleteDelivery } = useContext(DeliveryContext);
+  // Define columns and data source based on path
+  let columns, data, deleteFunc;
+
+  switch (path) {
+    case "users":
+      columns = userColumns;
+      data = users;
+      deleteFunc = deleteUser;
+      break;
+    case "products":
+      columns = productColumns;
+      data = products;
+      deleteFunc = deleteProduct;
+      break;
+    case "orders":
+      columns = orderColumns;
+      data = orders;
+      deleteFunc = deleteOrder;
+      break;
+    case "delivery":
+        columns = deliveryColumns;
+        data = delivery;
+        deleteFunc = deleteDelivery;
+        break;
+    case "notifications":
+        columns = notificationColumns;
+        data = notificationRows;
+        deleteFunc = () => {};
+        break;
+    case "system-health":
+        columns = systemHealthColumns;
+        data = systemHealthRows;
+        deleteFunc = () => {};
+        break;
+    case "logs":
+        columns = logColumns;
+        data = logRows;
+        deleteFunc = () => {};
+        break;
+     case "messages":
+        columns = []; // Placeholder
+        data = [];
+        deleteFunc = () => {};
+        break;
+    default:
+      columns = [];
+      data = [];
+  }
 
   useEffect(() => {
-    switch(path) {
-        case "users":
-            setData(userData);
-            setColumns(userColumns);
-            break;
-        case "products":
-            setData(productData);
-            setColumns(productColumns);
-            break;
-        case "orders":
-            setData(orderData);
-            setColumns(orderColumns);
-            break;
-        case "delivery":
-            setData(deliveryData);
-            setColumns(deliveryColumns);
-            break;
-        case "notifications":
-            setData(notificationRows);
-            setColumns(notificationColumns);
-            break;
-        case "system-health":
-            setData(systemHealthRows);
-            setColumns(systemHealthColumns);
-            break;
-        case "logs":
-            setData(logRows);
-            setColumns(logColumns);
-            break;
-        default:
-            setData([]);
-            setColumns([]);
-            break;
+    if (currentUser?.role === "user" && path === "orders") {
+        setList(data.filter(item => item.userId === currentUser.id));
+    } else {
+        setList(data);
     }
-  }, [path, userData, productData, orderData, deliveryData]);
+  }, [data, currentUser, path]);
 
   const handleDelete = (id) => {
     switch(path) {
@@ -95,9 +115,11 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`/${path}/${params.row.id}`} style={{ textDecoration: "none" }}>
-              <div className="viewButton">{t("datatable_view")}</div>
-            </Link>
+            {!["logs", "system-health"].includes(path) && (
+              <Link to={`/${path}/${params.row.id}`} style={{ textDecoration: "none" }}>
+                <div className="viewButton">{t("datatable_view")}</div>
+              </Link>
+            )}
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
@@ -114,15 +136,17 @@ const Datatable = () => {
     <div className="datatable">
       <div className="datatableTitle">
         {path.toUpperCase()}
-        <Link to={`/${path}/new`} className="link">
-          {t("datatable_add_new")}
-        </Link>
+        {!["notifications", "logs", "system-health", "messages"].includes(path) && (
+          <Link to={`/${path}/new`} className="link">
+            {t("datatable_add_new")}
+          </Link>
+        )}
       </div>
       <DataGrid
         className="datagrid"
         rows={data}
         columns={columns.concat(actionColumn)}
-        pageSize={10}
+        pageSize={1}
         rowsPerPageOptions={[1]}
         checkboxSelection
       />

@@ -8,8 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-const List = () => {
-    const rows = [
+const List = ({ rows }) => {
+    const defaultRows = [
         {
             id: 1143155,
             product: "Acer Nitro 5",
@@ -61,6 +61,8 @@ const List = () => {
             status: "Pending",
         },
     ];
+
+    const data = rows || defaultRows;
     return ( 
     <TableContainer component={Paper} className='table'>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -76,7 +78,7 @@ const List = () => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {rows.map((row) => (
+                {data.map((row) => (
                     <TableRow
                         key={row.id}
                     >

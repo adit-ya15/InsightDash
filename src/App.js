@@ -29,6 +29,19 @@ function App() {
           <Route element={<RequireAuth allowedRoles={["user"]} />}>
             <Route path="/" element={<UserHome />} />
           </Route>
+          <Route element={<RequireAuth allowedRoles={["user", "admin"]} />}>
+            <Route path="orders">
+              <Route index element={<List />} />
+              <Route path=":orderId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={orderInputs} title="Add New Order" />}
+              />
+            </Route>
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+
           <Route element={<RequireAuth allowedRoles={["admin"]} />}>
             <Route path="dashboard" element={<Home />} />
             <Route path="users">
@@ -49,14 +62,6 @@ function App() {
                 }
               />
             </Route>
-            <Route path="orders">
-              <Route index element={<List />} />
-              <Route path=":orderId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={orderInputs} title="Add New Order" />}
-              />
-            </Route>
             <Route path="delivery">
               <Route index element={<List />} />
               <Route path=":deliveryId" element={<Single />} />
@@ -73,8 +78,6 @@ function App() {
             <Route path="messages" element={<List />} />
             <Route path="system-health" element={<List />} />
             <Route path="logs" element={<List />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>

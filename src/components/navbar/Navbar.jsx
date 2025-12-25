@@ -14,15 +14,14 @@ import { UserContext } from "../../context/userContext";
 import { ProductContext } from "../../context/ProductContext";
 import { OrderContext } from "../../context/OrderContext";
 import { DeliveryContext } from "../../context/DeliveryContext";
-
+import LightModeIcon from '@mui/icons-material/LightMode';
 import { useLanguage } from "../../context/LanguageContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const { setQuery } = useSearch(); 
   const { language, toggleLanguage, t } = useLanguage();
-  
-  // Search Logic
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
@@ -31,8 +30,14 @@ const Navbar = () => {
   const { data: products } = useContext(ProductContext);
   const { data: orders } = useContext(OrderContext);
   const { data: delivery } = useContext(DeliveryContext);
+  const darkMode = useContext(DarkModeContext);
+  const { currentUser } = useContext(AuthContext);
+
+  const isUser = currentUser?.role === "user";
 
   useEffect(() => {
+    if (isUser) return; // Skip search logic for user
+
     const delayDebounceFn = setTimeout(() => {
       setQuery(searchTerm); 
 
@@ -53,7 +58,7 @@ const Navbar = () => {
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm, users, products, orders, delivery, setQuery]);
+  }, [searchTerm, users, products, orders, delivery, setQuery, isUser]);
 
   const handleSearchClick = (item) => {
     navigate(`/${item.type}/${item.id}`);
@@ -74,23 +79,32 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="wrapper">
+        {isUser && (
+            <Link to="/" style={{ textDecoration: "none", marginRight: "20px" }}>
+                <span className="logo">InsightDash</span>
+            </Link>
+        )}
         <div className="search">
-          <input
-            type="text"
-            placeholder={t("navbar_search")}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            value={searchTerm}
-          />
-          <SearchOutlinedIcon />
-          {searchResults.length > 0 && (
-            <div className="searchResults">
-              {searchResults.slice(0, 10).map((result, index) => (
-                <div key={index} className="searchItem" onClick={() => handleSearchClick(result)}>
-                  <span className="searchType">{result.type.toUpperCase()}</span>
-                  <span className="searchLabel">{result.label}</span>
+          {!isUser && (
+            <>
+              <input
+                type="text"
+                placeholder={t("navbar_search")}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                value={searchTerm}
+              />
+              <SearchOutlinedIcon />
+              {searchResults.length > 0 && (
+                <div className="searchResults">
+                  {searchResults.slice(0, 10).map((result, index) => (
+                    <div key={index} className="searchItem" onClick={() => handleSearchClick(result)}>
+                      <span className="searchType">{result.type.toUpperCase()}</span>
+                      <span className="searchLabel">{result.label}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
         </div>
         <div className="items">
@@ -99,35 +113,42 @@ const Navbar = () => {
             {language === "en" ? t("navbar_english") : t("navbar_hindi")}
           </div>
           <div className="item">
-            <DarkModeOutlinedIcon
+            {darkMode.darkMode ? <LightModeIcon
               className="icon"
               onClick={() => dispatch({ type: "TOGGLE" })}
-            />
-          </div>
-          <div className="item">
-            <FullscreenExitOutlinedIcon
+            /> : <DarkModeOutlinedIcon
               className="icon"
-              onClick={handleFullScreen}
-              style={{ cursor: "pointer" }}
-            />
+              onClick={() => dispatch({ type: "TOGGLE" })}
+            />}
           </div>
-          <div className="item">
-            <Link to="/notifications" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
-              <NotificationsNoneOutlinedIcon className="icon" />
-              <div className="counter">1</div>
-            </Link>
-          </div>
-          <div className="item">
-            <Link to="/messages" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
-              <ChatBubbleOutlineOutlinedIcon className="icon" />
-              <div className="counter">2</div>
-            </Link>
-          </div>
-          <div className="item">
-            <Link to="/logs" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
-              <ListOutlinedIcon className="icon" />
-            </Link>
-          </div>
+          {!isUser && (
+            <>
+              <div className="item">
+                <FullscreenExitOutlinedIcon
+                  className="icon"
+                  onClick={handleFullScreen}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+              <div className="item">
+                <Link to="/notifications" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+                  <NotificationsNoneOutlinedIcon className="icon" />
+                  <div className="counter">1</div>
+                </Link>
+              </div>
+              <div className="item">
+                <Link to="/messages" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+                  <ChatBubbleOutlineOutlinedIcon className="icon" />
+                  <div className="counter">2</div>
+                </Link>
+              </div>
+              <div className="item">
+                <Link to="/logs" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+                  <ListOutlinedIcon className="icon" />
+                </Link>
+              </div>
+            </>
+          )}
           <div className="item">
             <Link to="/profile">
               <img

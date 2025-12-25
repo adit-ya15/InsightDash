@@ -14,13 +14,24 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Mock Authentication Logic
     if (email === "admin" && password === "admin") {
-      const user = { email, password, role: "admin" };
+      const user = { 
+        id: "admin-1",
+        username: "admin",
+        email, 
+        password, 
+        role: "admin" 
+      };
       dispatch({ type: "LOGIN", payload: user });
       navigate("/dashboard");
     } else if (email === "user" && password === "user") {
-      const user = { email, password, role: "user" };
+      const user = { 
+        id: "user-1",
+        username: "user",
+        email, 
+        password, 
+        role: "user" 
+      };
       dispatch({ type: "LOGIN", payload: user });
       navigate("/");
     } else {
@@ -36,14 +47,16 @@ const Login = () => {
           type="text"
           placeholder="username (admin / user)"
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
         <input
           type="password"
           placeholder="password (admin / user)"
           onChange={(e) => setPassword(e.target.value)}
+          value={password}
         />
         <button type="submit">Login</button>
-        {error && <span>Wrong email or password!</span>}
+        {error && <span>Wrong username or password!</span>}
       </form>
     </div>
   );
