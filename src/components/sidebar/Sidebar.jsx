@@ -11,7 +11,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/AuthContext";
@@ -23,6 +23,10 @@ const Sidebar = () => {
     const { dispatch: authDispatch } = useContext(AuthContext);
     const { t } = useLanguage();
     const navigate = useNavigate();
+    const location = useLocation();
+    
+    // Get the first part of the path, e.g. "users" from "/users/123"
+    const currentPath = location.pathname.split("/")[1]; 
 
     const handleLogout = () => {
         authDispatch({ type: "LOGOUT" });
@@ -41,71 +45,71 @@ const Sidebar = () => {
                 <ul>
                     <p className="title">{t("sidebar_main")}</p>
                     <Link to="/dashboard" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "dashboard" || currentPath === "" ? "active" : ""}>
                             <DashboardIcon className="icon" />
                             <span>{t("sidebar_dashboard")}</span>
                         </li>
                     </Link>
                     <p className="title">{t("sidebar_lists")}</p>
                     <Link to="/users" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "users" ? "active" : ""}>
                             <PersonOutlineIcon className="icon" />
                             <span>{t("sidebar_users")}</span>
                         </li>
                     </Link>
                     <Link to="/products" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "products" ? "active" : ""}>
                             <StoreIcon className="icon" />
                             <span>{t("sidebar_products")}</span>
                         </li>
                     </Link>
                     <Link to="/orders" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "orders" ? "active" : ""}>
                             <CreditCardIcon className="icon" />
                             <span>{t("sidebar_orders")}</span>
                         </li>
                     </Link>
                     <Link to="/delivery" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "delivery" ? "active" : ""}>
                             <LocalShippingIcon className="icon" />
                             <span>{t("sidebar_delivery")}</span>
                         </li>
                     </Link>
                     <p className="title">{t("sidebar_useful")}</p>
                     <Link to="/stats" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "stats" ? "active" : ""}>
                             <InsertChartIcon className="icon" />
                             <span>{t("sidebar_stats")}</span>
                         </li>
                     </Link>
                     <Link to="/notifications" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "notifications" ? "active" : ""}>
                             <NotificationsNoneIcon className="icon" />
                             <span>{t("sidebar_notifications")}</span>
                         </li>
                     </Link>
                     <p className="title">{t("sidebar_service")}</p>
                     <Link to="/system-health" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "system-health" ? "active" : ""}>
                             <SettingsSystemDaydreamOutlinedIcon className="icon" />
                             <span>{t("sidebar_system_health")}</span>
                         </li>
                     </Link>
                     <Link to="/logs" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "logs" ? "active" : ""}>
                             <PsychologyOutlinedIcon className="icon" />
                             <span>{t("sidebar_logs")}</span>
                         </li>
                     </Link>
                     <Link to="/settings" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "settings" ? "active" : ""}>
                             <SettingsApplicationsIcon className="icon" />
                             <span>{t("sidebar_settings")}</span>
                         </li>
                     </Link>
                     <p className="title">{t("sidebar_user")}</p>
                     <Link to="/profile" style={{ textDecoration: "none" }}>
-                        <li>
+                        <li className={currentPath === "profile" ? "active" : ""}>
                             <AccountCircleOutlinedIcon className="icon" />
                             <span>{t("sidebar_profile")}</span>
                         </li>

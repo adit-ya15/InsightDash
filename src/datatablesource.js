@@ -29,24 +29,19 @@ export const userColumns = [
     },
 ];
 
-export const userRows = [
-     {
-        id: 1,
-        username: "Snow",
-        img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-        status: "active",
-        email: "1snow@gmail.com",
-        age: 35,
-    },
-    {
-        id: 2,
-        username: "Jamie Lannister",
-        img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-        email: "2snow@gmail.com",
-        status: "passive",
-        age: 42,
-    },
-];
+// Helper to generate random date
+const randomDate = (start, end) => {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
+}
+
+export const userRows = Array.from({ length: 60 }, (_, i) => ({
+    id: i + 1,
+    username: `User ${i + 1}`,
+    img: `https://picsum.photos/id/${i + 10}/200`,
+    status: Math.random() > 0.5 ? "active" : "passive",
+    email: `user${i + 1}@gmail.com`,
+    age: Math.floor(Math.random() * 50) + 18,
+}));
 
 export const productColumns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -80,26 +75,19 @@ export const productColumns = [
     },
 ];
 
-export const productRows = [
-    {
-        id: 1,
-        title: "Apple Macbook Pro",
-        img: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-        category: "Computers",
-        price: "$2000",
-        stock: "123",
-        status: "active",
-    },
-    {
-        id: 2,
-        title: "iPhone 14 Pro",
-        img: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-        category: "Phone",
-        price: "$999",
-        stock: "45",
-        status: "active",
-    },
-];
+const productTitles = ["Apple Macbook Pro", "iPhone 14 Pro", "Playstation 5", "Acer Nitro 5", "Samsung Galaxy S23", "Dell XPS 15", "iPad Air", "Airpods Pro", "Sony WH-1000XM5", "Nintendo Switch"];
+const categories = ["Computers", "Phone", "Gaming", "Tablets", "Accessories", "Audio"];
+
+export const productRows = Array.from({ length: 60 }, (_, i) => ({
+    id: i + 1,
+    title: productTitles[Math.floor(Math.random() * productTitles.length)] + ` ${i + 1}`,
+    img: `https://picsum.photos/id/${i + 100}/200`,
+    category: categories[Math.floor(Math.random() * categories.length)],
+    price: `$${Math.floor(Math.random() * 2000) + 100}`,
+    stock: Math.floor(Math.random() * 100),
+    status: Math.random() > 0.3 ? "active" : "passive",
+}));
+
 
 // Orders
 export const orderColumns = [
@@ -122,24 +110,16 @@ export const orderColumns = [
     },
 ];
 
-export const orderRows = [
-    {
-        id: 1143155,
-        product: "Acer Nitro 5",
-        customer: "John Smith",
-        date: "1 March",
-        amount: 785,
-        status: "Approved",
-    },
-    {
-        id: 2235235,
-        product: "Playstation 5",
-        customer: "Michael Doe",
-        date: "1 March",
-        amount: 900,
-        status: "Pending",
-    },
-];
+const customerNames = ["John Smith", "Michael Doe", "Jane Doe", "Alice Johnson", "Bob Brown", "Charlie Davis", "Emily White", "Frank Green"];
+
+export const orderRows = Array.from({ length: 60 }, (_, i) => ({
+    id: 1143155 + i,
+    product: productTitles[Math.floor(Math.random() * productTitles.length)],
+    customer: customerNames[Math.floor(Math.random() * customerNames.length)],
+    date: randomDate(new Date(2023, 0, 1), new Date()),
+    amount: Math.floor(Math.random() * 1000) + 50,
+    status: Math.random() > 0.5 ? "Approved" : "Pending",
+}));
 
 // Delivery
 export const deliveryColumns = [
@@ -153,27 +133,21 @@ export const deliveryColumns = [
         renderCell: (params) => {
             return (
                 <div className={`cellWithStatus ${params.row.status}`}>
-                    {params.row.status}
+                    {params.row.status.replace(/\s+/g, '')} 
                 </div>
             );
         },
     },
 ];
 
-export const deliveryRows = [
-    {
-        id: "TRK-001",
-        product: "Acer Nitro 5",
-        destination: "Los Angeles, CA",
-        status: "In Transit", 
-    },
-    {
-        id: "TRK-002",
-        product: "Playstation 5",
-        destination: "New York, NY",
-        status: "Delivered",
-    },
-];
+const destinations = ["Los Angeles, CA", "New York, NY", "Chicago, IL", "Houston, TX", "Phoenix, AZ", "Philadelphia, PA", "San Antonio, TX", "San Diego, CA"];
+
+export const deliveryRows = Array.from({ length: 60 }, (_, i) => ({
+    id: `TRK-${1000 + i}`,
+    product: productTitles[Math.floor(Math.random() * productTitles.length)],
+    destination: destinations[Math.floor(Math.random() * destinations.length)],
+    status: Math.random() > 0.4 ? "In Transit" : "Delivered", 
+}));
 
 // Notifications
 export const notificationColumns = [
