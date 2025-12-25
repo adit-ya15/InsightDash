@@ -1,42 +1,52 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { 
-    userColumns, userRows, 
-    productColumns, productRows,
-    orderColumns, orderRows,
-    deliveryColumns, deliveryRows,
+    userColumns, 
+    productColumns,
+    orderColumns,
+    deliveryColumns,
     notificationColumns, notificationRows,
     systemHealthColumns, systemHealthRows,
     logColumns, logRows
 } from "../../datatablesource";
-import { SearchContext } from "../../context/SearchContext";
+
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../context/userContext"
+import { ProductContext } from "../../context/ProductContext";
+import { OrderContext } from "../../context/OrderContext";
+import { DeliveryContext } from "../../context/DeliveryContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Datatable = () => {
   const location = useLocation();
-  const path = location.pathname.split("/")[1]; 
+  const path = location.pathname.split("/")[1];
 
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
-  const { searchQuery } = useContext(SearchContext);
-  
+  const { t } = useLanguage();
+
+  const { data: userData, handleDelete: deleteUser } = useContext(UserContext);
+  const { data: productData, handleDelete: deleteProduct } = useContext(ProductContext);
+  const { data: orderData, handleDelete: deleteOrder } = useContext(OrderContext);
+  const { data: deliveryData, handleDelete: deleteDelivery } = useContext(DeliveryContext);
+
   useEffect(() => {
     switch(path) {
         case "users":
-            setData(userRows);
+            setData(userData);
             setColumns(userColumns);
             break;
         case "products":
-            setData(productRows);
+            setData(productData);
             setColumns(productColumns);
             break;
         case "orders":
-            setData(orderRows);
+            setData(orderData);
             setColumns(orderColumns);
             break;
         case "delivery":
-            setData(deliveryRows);
+            setData(deliveryData);
             setColumns(deliveryColumns);
             break;
         case "notifications":
@@ -56,36 +66,43 @@ const Datatable = () => {
             setColumns([]);
             break;
     }
-  }, [path]);
+  }, [path, userData, productData, orderData, deliveryData]);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    switch(path) {
+        case "users":
+            deleteUser(id);
+            break;
+        case "products":
+            deleteProduct(id);
+            break;
+        case "orders":
+            deleteOrder(id);
+            break;
+        case "delivery":
+            deleteDelivery(id);
+            break;
+        default:
+            break;
+    }
   };
-  
-  // Filter data based on search query
-  const filteredData = data.filter((item) => {
-      if (!searchQuery) return true;
-      return Object.values(item).some(
-        val => String(val).toLowerCase().includes(searchQuery.toLowerCase())
-      );
-  });
 
   const actionColumn = [
     {
       field: "action",
-      headerName: "Action",
+      headerName: t("datatable_action"),
       width: 200,
       renderCell: (params) => {
         return (
           <div className="cellAction">
             <Link to={`/${path}/${params.row.id}`} style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
+              <div className="viewButton">{t("datatable_view")}</div>
             </Link>
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
-              Delete
+              {t("datatable_delete")}
             </div>
           </div>
         );
@@ -96,15 +113,15 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        {path.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
+        {path.toUpperCase()}
         <Link to={`/${path}/new`} className="link">
-          Add New
+          {t("datatable_add_new")}
         </Link>
       </div>
       <DataGrid
         className="datagrid"
-        rows={filteredData}
-        columns={columns.length > 0 ? columns.concat(actionColumn) : []}
+        rows={data}
+        columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

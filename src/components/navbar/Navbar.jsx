@@ -6,22 +6,59 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
-import { SearchContext } from "../../context/SearchContext";
+import { useSearch } from "../../context/SearchContext";
+import { UserContext } from "../../context/userContext";
+import { ProductContext } from "../../context/ProductContext";
+import { OrderContext } from "../../context/OrderContext";
+import { DeliveryContext } from "../../context/DeliveryContext";
+
+import { useLanguage } from "../../context/LanguageContext";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
-  const { dispatch: searchDispatch } = useContext(SearchContext);
-  const [language, setLanguage] = useState("English");
+  const { setQuery } = useSearch(); 
+  const { language, toggleLanguage, t } = useLanguage();
+  
+  // Search Logic
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    searchDispatch({ type: "SET_SEARCH", payload: e.target.value });
-  };
+  const { data: users } = useContext(UserContext);
+  const { data: products } = useContext(ProductContext);
+  const { data: orders } = useContext(OrderContext);
+  const { data: delivery } = useContext(DeliveryContext);
 
-  const toggleLanguage = () => {
-    setLanguage(language === "English" ? "Spanish" : "English");
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      setQuery(searchTerm); 
+
+      if (searchTerm.trim() === "") {
+        setSearchResults([]);
+        return;
+      }
+
+      const lowerQuery = searchTerm.toLowerCase();
+      
+      const filteredUsers = users.filter(u => u.username.toLowerCase().includes(lowerQuery)).map(u => ({...u, type: 'users', label: u.username}));
+      const filteredProducts = products.filter(p => p.title.toLowerCase().includes(lowerQuery)).map(p => ({...p, type: 'products', label: p.title}));
+      const filteredOrders = orders.filter(o => o.customer.toLowerCase().includes(lowerQuery) || o.product.toLowerCase().includes(lowerQuery)).map(o => ({...o, type: 'orders', label: `Order: ${o.product} for ${o.customer}`}));
+      const filteredDelivery = delivery.filter(d => (d.destination && d.destination.toLowerCase().includes(lowerQuery)) || (d.id && d.id.toString().toLowerCase().includes(lowerQuery))).map(d => ({...d, type: 'delivery', label: `Delivery to ${d.destination}`}));
+
+      const combined = [...filteredUsers, ...filteredProducts, ...filteredOrders, ...filteredDelivery];
+      setSearchResults(combined);
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, users, products, orders, delivery, setQuery]);
+
+  const handleSearchClick = (item) => {
+    navigate(`/${item.type}/${item.id}`);
+    setSearchTerm("");
+    setSearchResults([]);
   };
 
   const handleFullScreen = () => {
@@ -38,17 +75,28 @@ const Navbar = () => {
     <div className="navbar">
       <div className="wrapper">
         <div className="search">
-          <input 
-            type="text" 
-            placeholder="Search..." 
-            onChange={handleSearch}
+          <input
+            type="text"
+            placeholder={t("navbar_search")}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
           />
           <SearchOutlinedIcon />
+          {searchResults.length > 0 && (
+            <div className="searchResults">
+              {searchResults.slice(0, 10).map((result, index) => (
+                <div key={index} className="searchItem" onClick={() => handleSearchClick(result)}>
+                  <span className="searchType">{result.type.toUpperCase()}</span>
+                  <span className="searchLabel">{result.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="items">
           <div className="item" onClick={toggleLanguage} style={{ cursor: "pointer" }}>
             <LanguageOutlinedIcon className="icon" />
-            {language}
+            {language === "en" ? t("navbar_english") : t("navbar_hindi")}
           </div>
           <div className="item">
             <DarkModeOutlinedIcon
@@ -57,36 +105,36 @@ const Navbar = () => {
             />
           </div>
           <div className="item">
-            <FullscreenExitOutlinedIcon 
-                className="icon" 
-                onClick={handleFullScreen}
-                style={{ cursor: "pointer" }}
+            <FullscreenExitOutlinedIcon
+              className="icon"
+              onClick={handleFullScreen}
+              style={{ cursor: "pointer" }}
             />
           </div>
           <div className="item">
             <Link to="/notifications" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
-                <NotificationsNoneOutlinedIcon className="icon" />
-                <div className="counter">1</div>
+              <NotificationsNoneOutlinedIcon className="icon" />
+              <div className="counter">1</div>
             </Link>
           </div>
           <div className="item">
-             <Link to="/messages" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
-                <ChatBubbleOutlineOutlinedIcon className="icon" />
-                <div className="counter">2</div>
-             </Link>
+            <Link to="/messages" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+              <ChatBubbleOutlineOutlinedIcon className="icon" />
+              <div className="counter">2</div>
+            </Link>
           </div>
           <div className="item">
-             <Link to="/logs" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
-                <ListOutlinedIcon className="icon" />
-             </Link>
+            <Link to="/logs" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+              <ListOutlinedIcon className="icon" />
+            </Link>
           </div>
           <div className="item">
             <Link to="/profile">
-                <img
+              <img
                 src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
                 alt=""
                 className="avatar"
-                />
+              />
             </Link>
           </div>
         </div>

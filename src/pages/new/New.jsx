@@ -1,42 +1,128 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import "./new.scss"
 import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
+import { UserContext } from "../../context/userContext";
+import { ProductContext } from "../../context/ProductContext";
+import { OrderContext } from "../../context/OrderContext";
+import { DeliveryContext } from "../../context/DeliveryContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const New = ({inputs,title}) => {
-  const [file,setFile] = useState("");
+import { useLanguage } from "../../context/LanguageContext";
+
+const New = ({ inputs, title }) => {
+  const [file, setFile] = useState("");
+  const [data, setData] = useState({});
+  const { handleAdd: addUser } = useContext(UserContext);
+  const { handleAdd: addProduct } = useContext(ProductContext);
+  const { handleAdd: addOrder } = useContext(OrderContext);
+  const { handleAdd: addDelivery } = useContext(DeliveryContext);
+  const { t } = useLanguage();
+  
+  const location = useLocation();
+  const navigate = useNavigate();
+  const path = location.pathname.split("/")[1]; // "users", "products", "orders", "delivery"
+
+  let displayTitle = title;
+  if (path === "users") displayTitle = t("new_title_add_user");
+  else if (path === "products") displayTitle = t("new_title_add_product");
+  else if (path === "orders") displayTitle = t("new_title_add_order");
+  else if (path === "delivery") displayTitle = t("new_title_add_delivery");
+
+  const handleInput = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validation
+    let isValid = true;
+    for (const input of inputs) {
+        if (!data[input.name] || data[input.name].trim() === "") {
+            isValid = false;
+            break;
+        }
+    }
+
+    if (!isValid) {
+        alert("Please fill in all fields");
+        return;
+    }
+
+    let defaultImg = "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg";
+    if (path === "users") defaultImg = "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg";
+    else if (path === "orders") defaultImg = "https://images.pexels.com/photos/6169033/pexels-photo-6169033.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+    else if (path === "delivery") defaultImg = "https://images.pexels.com/photos/4393668/pexels-photo-4393668.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+    else if (path === "products") defaultImg = "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+
+    const newData = {
+      ...data,
+      img: file ? URL.createObjectURL(file) : defaultImg,
+      status: data.status || "active" 
+    };
+
+    if (path === "users") {
+      addUser(newData);
+    } else if (path === "products") {
+      addProduct(newData);
+    } else if (path === "orders") {
+        addOrder(newData);
+    } else if (path === "delivery") {
+        addDelivery(newData);
+    }
+    
+    navigate(-1); // Go back
+  };
+
   return (
-    <div className='new'>
-      <Sidebar/>
-      <div className='newContainer'>
-        <Navbar/>
+    <div className="new">
+      <Sidebar />
+      <div className="newContainer">
+        <Navbar />
         <div className="top">
-          <h1>{title}</h1>
+          <h1>{displayTitle}</h1>
         </div>
         <div className="bottom">
           <div className="left">
-            <img src={file? URL.createObjectURL(file) : 'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'} alt="" />
+            <img
+              src={
+                file
+                  ? URL.createObjectURL(file)
+                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+              }
+              alt=""
+            />
           </div>
           <div className="right">
-            <form >
+            <form onSubmit={handleSubmit}>
               <div className="formInput">
-                <label htmlFor='file'>Image: <DriveFolderUploadIcon className='icon'/></label>
-                <input type="file" id="file" style={{display:"none"}} onChange={(e) => setFile(e.target.files[0])}/>
+                <label htmlFor="file">
+                  {t("new_image")}: <DriveFolderUploadOutlinedIcon className="icon" />
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  style={{ display: "none" }}
+                />
               </div>
+
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
-                  <label >{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
+                  <label>{input.label}</label>
+                  <input type={input.type} placeholder={input.placeholder} name={input.name} onChange={handleInput}/>
                 </div>
               ))}
-              <button>Send</button>
+              <button>{t("new_btn_send")}</button>
             </form>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default New

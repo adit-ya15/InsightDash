@@ -1,34 +1,15 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useState } from "react";
 
-const INITIAL_STATE = {
-  searchQuery: "",
-};
+const SearchContext = createContext(null);
 
-export const SearchContext = createContext(INITIAL_STATE);
-
-const SearchReducer = (state, action) => {
-  switch (action.type) {
-    case "SET_SEARCH":
-      return {
-        ...state,
-        searchQuery: action.payload,
-      };
-    case "RESET_SEARCH":
-      return {
-        ...state,
-        searchQuery: "",
-      };
-    default:
-      return state;
-  }
-};
-
-export const SearchContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
+export function SearchProvider({ children }) {
+  const [query, setQuery] = useState("");
 
   return (
-    <SearchContext.Provider value={{ searchQuery: state.searchQuery, dispatch }}>
+    <SearchContext.Provider value={{ query, setQuery }}>
       {children}
     </SearchContext.Provider>
   );
-};
+}
+
+export const useSearch = () => useContext(SearchContext);
