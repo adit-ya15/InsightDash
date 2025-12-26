@@ -8,7 +8,7 @@ This project is intentionally designed for **frontend internships**, focusing on
 
 ## 🚀 Live Demo
 
-🔗 **Live URL:** https://<your-netlify-link>
+🔗 **Live URL:** https://insightdashh.netlify.app/
 
 ---
 
