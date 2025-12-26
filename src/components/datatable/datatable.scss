@@ -2,6 +2,15 @@
     min-height: 600px;
     padding: 20px;
 
+    @media screen and (max-width: 768px) {
+        overflow-x: scroll;
+
+        // Ensure min-width doesn't force page scroll if possible, or just accept global scroll
+        .datagrid {
+            min-width: 600px; // Ensure inner grid is wide enough to be readable
+        }
+    }
+
     .datatableTitle {
         width: 100%;
         font-size: 24px;

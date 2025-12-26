@@ -32,6 +32,10 @@
         border-bottom: 1px solid gray;
     }
 
+    @media screen and (max-width: 480px) {
+        width: 100%;
+    }
+
     .percentage {
         display: flex;
         align-items: center;

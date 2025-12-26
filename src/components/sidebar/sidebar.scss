@@ -91,6 +91,14 @@
     }
 
     @media screen and (max-width: 480px) {
-        display: none;
+        position: fixed;
+        z-index: 999;
+        left: -200px;
+        transition: 0.3s ease;
+
+        &.active {
+            left: 0;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        }
     }
 }

@@ -5,6 +5,10 @@
     padding: 10px;
     color: gray;
 
+    @media screen and (max-width: 480px) {
+        width: 100%;
+    }
+
     .title {
         margin-bottom: 5px;
     }

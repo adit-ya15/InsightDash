@@ -6,6 +6,7 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
@@ -17,9 +18,11 @@ import { DeliveryContext } from "../../context/DeliveryContext";
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { useLanguage } from "../../context/LanguageContext";
 import { AuthContext } from "../../context/AuthContext";
+import { SidebarContext } from "../../context/SidebarContext";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const { dispatch: sidebarDispatch } = useContext(SidebarContext);
   const { setQuery } = useSearch();
   const { language, toggleLanguage, t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
@@ -83,6 +86,11 @@ const Navbar = () => {
           <Link to="/" style={{ textDecoration: "none", marginRight: "20px" }}>
             <span className="logo">InsightDash</span>
           </Link>
+        )}
+        {!isUser && (
+          <div className="hamburger" onClick={() => sidebarDispatch({ type: "TOGGLE" })}>
+            <MenuIcon className="icon" />
+          </div>
         )}
         <div className="search">
           {!isUser && (

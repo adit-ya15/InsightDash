@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs, orderInputs, deliveryInputs } from "./formSource";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import { SidebarContextProvider } from "./context/SidebarContext";
 import "./style/global.scss";
 import "./style/dark.scss";
 
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
+      <SidebarContextProvider>
       <BrowserRouter>
         <Routes>
           <Route path="login" element={<Login />} />
@@ -79,6 +81,7 @@ function App() {
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>
+      </SidebarContextProvider>
     </div>
   );
 }
