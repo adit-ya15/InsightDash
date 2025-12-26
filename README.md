@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+# 📊 InsightDash — Role-Based Admin & User Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+InsightDash is a **frontend-focused dashboard application** built with React that demonstrates **role-based authentication, protected routes, and modern dashboard UI patterns** commonly used in real-world SaaS products.
 
-## Available Scripts
+This project is intentionally designed for **frontend internships**, focusing on UI architecture, state management, and UX decisions rather than backend complexity.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Live Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🔗 **Live URL:** https://<your-netlify-link>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🔐 Demo Credentials
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Authentication and data are mocked for frontend demonstration purposes.
 
-### `npm run build`
+### Admin
+- **Username:** `admin`
+- **Password:** `admin`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### User
+- **Username:** `user`
+- **Password:** `user`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧠 Key Features
 
-### `npm run eject`
+### ✅ Role-Based Authentication
+- Mock authentication using **React Context API**
+- Two roles: **Admin** and **User**
+- Persistent login using **localStorage**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### ✅ Admin Dashboard
+- Overview widgets (Users, Orders, Earnings, Balance)
+- Analytics charts
+- Orders management with actions
+- Admin-only sidebar navigation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### ✅ User Dashboard
+- Personalized home page
+- Account summary
+- Recent orders table
+- Clean UI without admin controls
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### ✅ Protected Routes
+- Users cannot access admin-only pages
+- Route-level access control based on role
+- Conditional rendering for UI elements
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### ✅ Modern UI & UX
+- Clean SaaS-style dashboard layout
+- Reusable cards and tables
+- Responsive design
+- Consistent spacing, typography, and colors
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🛠️ Tech Stack
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **React**
+- **React Router**
+- **Context API**
+- **SCSS / CSS**
+- **LocalStorage**
+- **Netlify (Deployment)**
 
-### Code Splitting
+> ❌ No backend  
+> ❌ No real database  
+> ✔ Frontend-focused architecture and UI logic
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
+## 📂 Project Structure (High Level)
+```src/
+├── components/
+├── context/
+│ └── AuthContext.js
+├── pages/
+│ ├── login/
+│ ├── dashboard/
+│ ├── orders/
+│ ├── profile/
+│ └── userHome/
+├── routes/
+├── styles/
+└── App.jsx
+```
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🧭 Routing Overview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `/login` → Login page
+- `/` → User home (User only)
+- `/dashboard` → Admin dashboard (Admin only)
+- `/orders` → Orders page (Admin only)
+- `/profile` → Profile page (Role-based view)
 
-### Advanced Configuration
+Client-side routing is handled using **React Router**, with Netlify redirects configured for refresh-safe navigation.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 📸 Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+> Key screens showcasing **role-based access**, **dashboard UI**, and **user/admin flows**.
 
-### `npm run build` fails to minify
+### 🔐 Login Page
+Mock authentication entry point for Admin and User roles.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Login Page](screenshots/login.png)
+
+---
+
+### 👤 User Dashboard
+Personalized dashboard for users with order summary and recent activity.
+
+![User Dashboard](screenshots/user-dashboard.png)
+
+---
+
+### 👤 User Profile & Account Summary
+User profile page displaying personal details and account summary.
+
+![User Profile](screenshots/user-profile.png)
+
+---
+
+### 🧑‍💼 Admin Dashboard
+Admin-only dashboard with analytics, widgets, and charts.
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+---
+
+### 📦 Orders Management (Admin)
+Orders table with actions and status indicators.
+
+![Admin Orders](screenshots/admin-orders.png)
+
+---
+
+## 📌 Notes for Reviewers
+
+- All data shown is **mocked**
+- Authentication is **frontend-only**
+- Focus areas:
+  - Role-based UI rendering
+  - State management
+  - Component structure
+  - Dashboard UX patterns
+
+---
+
+## 📈 Future Improvements
+
+- Replace mock auth with Firebase / JWT
+- Connect to real backend APIs
+- Add pagination & advanced filters
+- Improve accessibility
+- Add dark mode toggle
+
+---
+
+## 👤 Author
+
+**Aditya Verma**  
+Frontend Developer  
+
+- GitHub: https://github.com/adit-ya15
+- Portfolio: *(add if available)*
+
+---
+
+## ⭐ If you like this project
+
+Feel free to ⭐ the repository — it helps a lot!
+
