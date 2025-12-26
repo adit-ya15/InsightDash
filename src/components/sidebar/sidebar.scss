@@ -36,20 +36,26 @@
             .title {
                 font-size: 10px;
                 font-weight: bold;
-                color: #999;
+                color: #666; // Darkened from #999 for better contrast
                 margin-top: 15px;
                 margin-bottom: 5px;
             }
 
             li {
-                display: flex;
-                align-items: center;
                 padding: 5px;
                 cursor: pointer;
+                display: block; // Changed from flex since flex is now on the Link or internal items
 
                 &:hover,
                 &.active {
                     background-color: #ece8ff;
+                }
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    text-decoration: none;
                 }
 
                 .icon {
@@ -60,7 +66,7 @@
                 span {
                     font-size: 13px;
                     font-weight: 600;
-                    color: #888;
+                    color: #555; // Darkened from #888 for better contrast
                     margin-left: 10px;
                 }
             }

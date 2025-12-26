@@ -83,44 +83,46 @@ const New = ({ inputs, title }) => {
       {!isUser && <Sidebar />}
       <div className="newContainer">
         <Navbar />
-        <div className="top">
-          <h1>{displayTitle}</h1>
-        </div>
-        <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
+        <main>
+          <div className="top">
+            <h1>{displayTitle}</h1>
           </div>
-          <div className="right">
-            <form onSubmit={handleSubmit}>
-              <div className="formInput">
-                <label htmlFor="file">
-                  {t("new_image")}: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  style={{ display: "none" }}
-                />
-              </div>
-
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} name={input.name} onChange={handleInput} />
+          <div className="bottom">
+            <div className="left">
+              <img
+                src={
+                  file
+                    ? URL.createObjectURL(file)
+                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                }
+                alt=""
+              />
+            </div>
+            <div className="right">
+              <form onSubmit={handleSubmit}>
+                <div className="formInput">
+                  <label htmlFor="file">
+                    {t("new_image")}: <DriveFolderUploadOutlinedIcon className="icon" />
+                  </label>
+                  <input
+                    type="file"
+                    id="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                    style={{ display: "none" }}
+                  />
                 </div>
-              ))}
-              <button>{t("new_btn_send")}</button>
-            </form>
+
+                {inputs.map((input) => (
+                  <div className="formInput" key={input.id}>
+                    <label>{input.label}</label>
+                    <input type={input.type} placeholder={input.placeholder} name={input.name} onChange={handleInput} />
+                  </div>
+                ))}
+                <button>{t("new_btn_send")}</button>
+              </form>
+            </div>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );

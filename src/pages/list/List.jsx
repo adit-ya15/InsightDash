@@ -11,10 +11,12 @@ const List = () => {
 
     return (
         <div className='list'>
-            {!isUser && <Sidebar/>}
+            {!isUser && <Sidebar />}
             <div className="listContainer" style={isUser ? { maxWidth: "1200px", margin: "0 auto" } : {}}>
-                <Navbar/>
-                <Datatable/>
+                <Navbar />
+                <main>
+                    <Datatable />
+                </main>
             </div>
         </div>
     )

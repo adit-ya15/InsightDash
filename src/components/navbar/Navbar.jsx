@@ -88,7 +88,7 @@ const Navbar = () => {
           </Link>
         )}
         {!isUser && (
-          <div className="hamburger" onClick={() => sidebarDispatch({ type: "TOGGLE" })}>
+          <div className="hamburger" onClick={() => sidebarDispatch({ type: "TOGGLE" })} role="button" aria-label="Toggle Sidebar">
             <MenuIcon className="icon" />
           </div>
         )}
@@ -100,6 +100,7 @@ const Navbar = () => {
                 placeholder={t("navbar_search")}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 value={searchTerm}
+                aria-label={t("navbar_search") || "Search"}
               />
               <SearchOutlinedIcon />
               {searchResults.length > 0 && (
@@ -116,7 +117,7 @@ const Navbar = () => {
           )}
         </div>
         <div className="items">
-          <div className="item" onClick={toggleLanguage} style={{ cursor: "pointer" }}>
+          <div className="item" onClick={toggleLanguage} style={{ cursor: "pointer" }} aria-label="Toggle Language" role="button">
             <LanguageOutlinedIcon className="icon" />
             {language === "en" ? t("navbar_english") : t("navbar_hindi")}
           </div>
@@ -124,9 +125,13 @@ const Navbar = () => {
             {darkMode.darkMode ? <LightModeIcon
               className="icon"
               onClick={() => dispatch({ type: "TOGGLE" })}
+              aria-label="Switch to Light Mode"
+              role="button"
             /> : <DarkModeOutlinedIcon
               className="icon"
               onClick={() => dispatch({ type: "TOGGLE" })}
+              aria-label="Switch to Dark Mode"
+              role="button"
             />}
           </div>
           {!isUser && (
@@ -136,32 +141,34 @@ const Navbar = () => {
                   className="icon"
                   onClick={handleFullScreen}
                   style={{ cursor: "pointer" }}
+                  aria-label="Toggle Fullscreen"
+                  role="button"
                 />
               </div>
               <div className="item">
-                <Link to="/notifications" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+                <Link to="/notifications" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }} aria-label={t("navbar_notifications") || "Notifications"}>
                   <NotificationsNoneOutlinedIcon className="icon" />
                   <div className="counter">1</div>
                 </Link>
               </div>
               <div className="item">
-                <Link to="/messages" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+                <Link to="/messages" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }} aria-label="Messages">
                   <ChatBubbleOutlineOutlinedIcon className="icon" />
                   <div className="counter">2</div>
                 </Link>
               </div>
               <div className="item">
-                <Link to="/logs" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+                <Link to="/logs" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }} aria-label="Logs">
                   <ListOutlinedIcon className="icon" />
                 </Link>
               </div>
             </>
           )}
           <div className="item">
-            <Link to="/profile">
+            <Link to="/profile" aria-label="User Profile">
               <img
                 src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                alt=""
+                alt="User Avatar"
                 className="avatar"
               />
             </Link>

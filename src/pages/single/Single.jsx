@@ -88,121 +88,123 @@ const Single = () => {
       {!isUserRole && <Sidebar />}
       <div className="singleContainer">
         <Navbar />
-        <div className="top">
-          <div className="left">
-            <div className="editButton">{t("single_edit")}</div>
-            <h1 className="title">{title}</h1>
-            <div className="item">
-              <img src={img} alt="" className="itemImg" />
-              <div className="details">
-                <h1 className="itemTitle">{name}</h1>
-                {isUser && (
-                  <>
-                    <div className="detailItem">
-                      <span className='itemKey'>Email:</span>
-                      <span className='itemValue'>{dataItem.email}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Age:</span>
-                      <span className='itemValue'>{dataItem.age}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Status:</span>
-                      <span className='itemValue'>{dataItem.status}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Country:</span>
-                      <span className='itemValue'>USA</span>
-                    </div>
-                  </>
-                )}
-                {isNotification && (
-                  <>
-                    <div className="detailItem">
-                      <span className='itemKey'>ID:</span>
-                      <span className='itemValue'>{dataItem.id}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Date:</span>
-                      <span className='itemValue'>{dataItem.date}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Message:</span>
-                      <span className='itemValue'>{dataItem.message}</span>
-                    </div>
-                  </>
-                )}
-                {isOrder && (
-                  <>
-                    <div className="detailItem">
-                      <span className='itemKey'>ID:</span>
-                      <span className='itemValue'>{dataItem.id}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Customer:</span>
-                      <span className='itemValue'>{dataItem.customer}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Amount:</span>
-                      <span className='itemValue'>{dataItem.amount}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Date:</span>
-                      <span className='itemValue'>{dataItem.date}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Status:</span>
-                      <span className='itemValue'>{dataItem.status}</span>
-                    </div>
-                  </>
-                )}
-                {isDelivery && (
-                  <>
-                    <div className="detailItem">
-                      <span className='itemKey'>ID:</span>
-                      <span className='itemValue'>{dataItem.id}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Destination:</span>
-                      <span className='itemValue'>{dataItem.destination}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Status:</span>
-                      <span className='itemValue'>{dataItem.status}</span>
-                    </div>
-                  </>
-                )}
-                {!isUser && !isNotification && !isOrder && !isDelivery && (
-                  <>
-                    <div className="detailItem">
-                      <span className='itemKey'>ID:</span>
-                      <span className='itemValue'>{dataItem.id}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Price:</span>
-                      <span className='itemValue'>{dataItem.price}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Category:</span>
-                      <span className='itemValue'>{dataItem.category}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className='itemKey'>Stock:</span>
-                      <span className='itemValue'>{dataItem.stock}</span>
-                    </div>
-                  </>
-                )}
+        <main>
+          <div className="top">
+            <div className="left">
+              <div className="editButton">{t("single_edit")}</div>
+              <h1 className="title">{title}</h1>
+              <div className="item">
+                <img src={img} alt="" className="itemImg" />
+                <div className="details">
+                  <h1 className="itemTitle">{name}</h1>
+                  {isUser && (
+                    <>
+                      <div className="detailItem">
+                        <span className='itemKey'>Email:</span>
+                        <span className='itemValue'>{dataItem.email}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Age:</span>
+                        <span className='itemValue'>{dataItem.age}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Status:</span>
+                        <span className='itemValue'>{dataItem.status}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Country:</span>
+                        <span className='itemValue'>USA</span>
+                      </div>
+                    </>
+                  )}
+                  {isNotification && (
+                    <>
+                      <div className="detailItem">
+                        <span className='itemKey'>ID:</span>
+                        <span className='itemValue'>{dataItem.id}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Date:</span>
+                        <span className='itemValue'>{dataItem.date}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Message:</span>
+                        <span className='itemValue'>{dataItem.message}</span>
+                      </div>
+                    </>
+                  )}
+                  {isOrder && (
+                    <>
+                      <div className="detailItem">
+                        <span className='itemKey'>ID:</span>
+                        <span className='itemValue'>{dataItem.id}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Customer:</span>
+                        <span className='itemValue'>{dataItem.customer}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Amount:</span>
+                        <span className='itemValue'>{dataItem.amount}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Date:</span>
+                        <span className='itemValue'>{dataItem.date}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Status:</span>
+                        <span className='itemValue'>{dataItem.status}</span>
+                      </div>
+                    </>
+                  )}
+                  {isDelivery && (
+                    <>
+                      <div className="detailItem">
+                        <span className='itemKey'>ID:</span>
+                        <span className='itemValue'>{dataItem.id}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Destination:</span>
+                        <span className='itemValue'>{dataItem.destination}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Status:</span>
+                        <span className='itemValue'>{dataItem.status}</span>
+                      </div>
+                    </>
+                  )}
+                  {!isUser && !isNotification && !isOrder && !isDelivery && (
+                    <>
+                      <div className="detailItem">
+                        <span className='itemKey'>ID:</span>
+                        <span className='itemValue'>{dataItem.id}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Price:</span>
+                        <span className='itemValue'>{dataItem.price}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Category:</span>
+                        <span className='itemValue'>{dataItem.category}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className='itemKey'>Stock:</span>
+                        <span className='itemValue'>{dataItem.stock}</span>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
+            <div className="right">
+              <Chart aspect={3 / 1} title={`${isUser ? "User" : "Item"} Spending (Last 6 Months)`} />
+            </div>
           </div>
-          <div className="right">
-            <Chart aspect={3 / 1} title={`${isUser ? "User" : "Item"} Spending (Last 6 Months)`} />
+          <div className="bottom">
+            <h1 className="title">{t("single_last_transactions")}</h1>
+            <List />
           </div>
-        </div>
-        <div className="bottom">
-          <h1 className="title">{t("single_last_transactions")}</h1>
-          <List />
-        </div>
+        </main>
       </div>
     </div>
   )

@@ -49,77 +49,77 @@ const Sidebar = () => {
             <div className="center">
                 <ul>
                     <p className="title">{t("sidebar_main")}</p>
-                    <Link to="/dashboard" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "dashboard" || currentPath === "" ? "active" : ""}>
+                    <li className={currentPath === "dashboard" || currentPath === "" ? "active" : ""}>
+                        <Link to="/dashboard" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_dashboard")}>
                             <DashboardIcon className="icon" />
                             <span>{t("sidebar_dashboard")}</span>
-                        </li>
-                    </Link>
+                        </Link>
+                    </li>
                     <p className="title">{t("sidebar_lists")}</p>
-                    <Link to="/users" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "users" ? "active" : ""}>
+                    <li className={currentPath === "users" ? "active" : ""}>
+                        <Link to="/users" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_users")}>
                             <PersonOutlineIcon className="icon" />
                             <span>{t("sidebar_users")}</span>
-                        </li>
-                    </Link>
-                    <Link to="/products" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "products" ? "active" : ""}>
+                        </Link>
+                    </li>
+                    <li className={currentPath === "products" ? "active" : ""}>
+                        <Link to="/products" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_products")}>
                             <StoreIcon className="icon" />
                             <span>{t("sidebar_products")}</span>
-                        </li>
-                    </Link>
-                    <Link to="/orders" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "orders" ? "active" : ""}>
+                        </Link>
+                    </li>
+                    <li className={currentPath === "orders" ? "active" : ""}>
+                        <Link to="/orders" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_orders")}>
                             <CreditCardIcon className="icon" />
                             <span>{t("sidebar_orders")}</span>
-                        </li>
-                    </Link>
-                    <Link to="/delivery" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "delivery" ? "active" : ""}>
+                        </Link>
+                    </li>
+                    <li className={currentPath === "delivery" ? "active" : ""}>
+                        <Link to="/delivery" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_delivery")}>
                             <LocalShippingIcon className="icon" />
                             <span>{t("sidebar_delivery")}</span>
-                        </li>
-                    </Link>
+                        </Link>
+                    </li>
                     <p className="title">{t("sidebar_useful")}</p>
-                    <Link to="/stats" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "stats" ? "active" : ""}>
+                    <li className={currentPath === "stats" ? "active" : ""}>
+                        <Link to="/stats" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_stats")}>
                             <InsertChartIcon className="icon" />
                             <span>{t("sidebar_stats")}</span>
-                        </li>
-                    </Link>
-                    <Link to="/notifications" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "notifications" ? "active" : ""}>
+                        </Link>
+                    </li>
+                    <li className={currentPath === "notifications" ? "active" : ""}>
+                        <Link to="/notifications" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_notifications")}>
                             <NotificationsNoneIcon className="icon" />
                             <span>{t("sidebar_notifications")}</span>
-                        </li>
-                    </Link>
+                        </Link>
+                    </li>
                     <p className="title">{t("sidebar_service")}</p>
-                    <Link to="/system-health" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "system-health" ? "active" : ""}>
+                    <li className={currentPath === "system-health" ? "active" : ""}>
+                        <Link to="/system-health" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_system_health")}>
                             <SettingsSystemDaydreamOutlinedIcon className="icon" />
                             <span>{t("sidebar_system_health")}</span>
-                        </li>
-                    </Link>
-                    <Link to="/logs" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "logs" ? "active" : ""}>
+                        </Link>
+                    </li>
+                    <li className={currentPath === "logs" ? "active" : ""}>
+                        <Link to="/logs" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_logs")}>
                             <PsychologyOutlinedIcon className="icon" />
                             <span>{t("sidebar_logs")}</span>
-                        </li>
-                    </Link>
-                    <Link to="/settings" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "settings" ? "active" : ""}>
+                        </Link>
+                    </li>
+                    <li className={currentPath === "settings" ? "active" : ""}>
+                        <Link to="/settings" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_settings")}>
                             <SettingsApplicationsIcon className="icon" />
                             <span>{t("sidebar_settings")}</span>
-                        </li>
-                    </Link>
+                        </Link>
+                    </li>
                     <p className="title">{t("sidebar_user")}</p>
-                    <Link to="/profile" style={{ textDecoration: "none" }} onClick={handleClose}>
-                        <li className={currentPath === "profile" ? "active" : ""}>
+                    <li className={currentPath === "profile" ? "active" : ""}>
+                        <Link to="/profile" style={{ textDecoration: "none" }} onClick={handleClose} aria-label={t("sidebar_profile")}>
                             <AccountCircleOutlinedIcon className="icon" />
                             <span>{t("sidebar_profile")}</span>
-                        </li>
-                    </Link>
-                    <li onClick={handleLogout} style={{ cursor: "pointer" }}>
+                        </Link>
+                    </li>
+                    <li onClick={handleLogout} style={{ cursor: "pointer" }} role="button" aria-label={t("sidebar_logout")}>
                         <ExitToAppIcon className="icon" />
                         <span>{t("sidebar_logout")}</span>
                     </li>

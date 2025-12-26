@@ -18,7 +18,7 @@
     .title {
         font-weight: bold;
         font-size: 14px;
-        color: rgb(160, 160, 160);
+        color: rgb(100, 100, 100); // Darkened from 160,160,160
     }
 
     .counter {
@@ -30,6 +30,7 @@
         width: max-content;
         font-size: 12px;
         border-bottom: 1px solid gray;
+        color: #555; // Darkened for better contrast implies inheritance was issue or just to be safe
     }
 
     @media screen and (max-width: 480px) {
