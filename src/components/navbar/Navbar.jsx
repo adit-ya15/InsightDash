@@ -20,7 +20,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
-  const { setQuery } = useSearch(); 
+  const { setQuery } = useSearch();
   const { language, toggleLanguage, t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -36,10 +36,10 @@ const Navbar = () => {
   const isUser = currentUser?.role === "user";
 
   useEffect(() => {
-    if (isUser) return; // Skip search logic for user
+    if (isUser) return;
 
     const delayDebounceFn = setTimeout(() => {
-      setQuery(searchTerm); 
+      setQuery(searchTerm);
 
       if (searchTerm.trim() === "") {
         setSearchResults([]);
@@ -47,11 +47,11 @@ const Navbar = () => {
       }
 
       const lowerQuery = searchTerm.toLowerCase();
-      
-      const filteredUsers = users.filter(u => u.username.toLowerCase().includes(lowerQuery)).map(u => ({...u, type: 'users', label: u.username}));
-      const filteredProducts = products.filter(p => p.title.toLowerCase().includes(lowerQuery)).map(p => ({...p, type: 'products', label: p.title}));
-      const filteredOrders = orders.filter(o => o.customer.toLowerCase().includes(lowerQuery) || o.product.toLowerCase().includes(lowerQuery)).map(o => ({...o, type: 'orders', label: `Order: ${o.product} for ${o.customer}`}));
-      const filteredDelivery = delivery.filter(d => (d.destination && d.destination.toLowerCase().includes(lowerQuery)) || (d.id && d.id.toString().toLowerCase().includes(lowerQuery))).map(d => ({...d, type: 'delivery', label: `Delivery to ${d.destination}`}));
+
+      const filteredUsers = users.filter(u => u.username.toLowerCase().includes(lowerQuery)).map(u => ({ ...u, type: 'users', label: u.username }));
+      const filteredProducts = products.filter(p => p.title.toLowerCase().includes(lowerQuery)).map(p => ({ ...p, type: 'products', label: p.title }));
+      const filteredOrders = orders.filter(o => o.customer.toLowerCase().includes(lowerQuery) || o.product.toLowerCase().includes(lowerQuery)).map(o => ({ ...o, type: 'orders', label: `Order: ${o.product} for ${o.customer}` }));
+      const filteredDelivery = delivery.filter(d => (d.destination && d.destination.toLowerCase().includes(lowerQuery)) || (d.id && d.id.toString().toLowerCase().includes(lowerQuery))).map(d => ({ ...d, type: 'delivery', label: `Delivery to ${d.destination}` }));
 
       const combined = [...filteredUsers, ...filteredProducts, ...filteredOrders, ...filteredDelivery];
       setSearchResults(combined);
@@ -80,9 +80,9 @@ const Navbar = () => {
     <div className="navbar">
       <div className="wrapper">
         {isUser && (
-            <Link to="/" style={{ textDecoration: "none", marginRight: "20px" }}>
-                <span className="logo">InsightDash</span>
-            </Link>
+          <Link to="/" style={{ textDecoration: "none", marginRight: "20px" }}>
+            <span className="logo">InsightDash</span>
+          </Link>
         )}
         <div className="search">
           {!isUser && (

@@ -28,7 +28,6 @@ a {
     color: inherit;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -42,13 +41,7 @@ a {
     border-radius: 5px;
 }
 
-// Media Queries Breakpoints
-// Mobile: max-width 480px
-// Tablet: max-width 768px
-// Laptop: max-width 1024px
-
 .app {
-    // display: flex; // Removed to allow full width block layout for children
     width: 100%;
     min-height: 100vh;
 }

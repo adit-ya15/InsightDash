@@ -49,7 +49,6 @@ const Single = () => {
   const isOrder = path === "orders";
   const isDelivery = path === "delivery";
 
-  // Fallback if not found
   if (!dataItem) {
     return (
       <div className='single'>

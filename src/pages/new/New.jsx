@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react'
 import "./new.scss"
 import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
-// import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
 import { UserContext } from "../../context/userContext";
 import { ProductContext } from "../../context/ProductContext";
@@ -26,7 +25,7 @@ const New = ({ inputs, title }) => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const path = location.pathname.split("/")[1]; // "users", "products", "orders", "delivery"
+  const path = location.pathname.split("/")[1];
 
   let displayTitle = title;
   if (path === "users") displayTitle = t("new_title_add_user");
@@ -41,7 +40,6 @@ const New = ({ inputs, title }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation
     let isValid = true;
     for (const input of inputs) {
       if (!data[input.name] || data[input.name].trim() === "") {
@@ -77,7 +75,7 @@ const New = ({ inputs, title }) => {
       addDelivery(newData);
     }
 
-    navigate(-1); // Go back
+    navigate(-1);
   };
 
   return (

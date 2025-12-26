@@ -11,7 +11,6 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleAdd = (user) => {
-    // Basic ID generation for demo purposes
     const newItem = { id: data.length + 1, ...user };
     setData([...data, newItem]);
   };

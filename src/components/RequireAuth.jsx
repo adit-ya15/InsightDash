@@ -11,13 +11,11 @@ const RequireAuth = ({ allowedRoles }) => {
   }
 
   if (allowedRoles && !allowedRoles.includes(currentUser.role)) {
-    // Redirect to home if user tries to access admin content, or login
     if (currentUser.role === "user") {
-        return <Navigate to="/" replace />;
+      return <Navigate to="/" replace />;
     }
-    // If admin tries to access user only content (if any), redirect to dashboard
-     if (currentUser.role === "admin") {
-        return <Navigate to="/dashboard" replace />;
+    if (currentUser.role === "admin") {
+      return <Navigate to="/dashboard" replace />;
     }
     return <Navigate to="/login" replace />;
   }

@@ -67,14 +67,12 @@
                 border: 1px solid #333;
             }
 
-            // --- HEADER NUCLEAR FIX ---
             .MuiDataGrid-columnHeaders {
                 background-color: #000 !important;
                 background: #000 !important;
                 border-bottom: 1px solid #333;
             }
 
-            // Force every single element inside the header to be black
             .MuiDataGrid-columnHeaders * {
                 background-color: #000 !important;
                 background: #000 !important;
@@ -84,9 +82,6 @@
                 color: #eee !important;
             }
 
-            // --------------------------
-
-            // Filler / Right gap fix
             .MuiDataGrid-filler {
                 background-color: #000 !important;
             }

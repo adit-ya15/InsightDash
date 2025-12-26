@@ -13,7 +13,6 @@ const Widget = ({ type }) => {
     const { data: users } = useContext(UserContext);
     const { data: orders } = useContext(OrderContext);
 
-    //temporary
     let amount = 100;
     const diff = 20;
 
@@ -24,7 +23,7 @@ const Widget = ({ type }) => {
                 isMoney: false,
                 link: "See all users",
                 linkPath: "/users",
-                icon: <PersonOutlinedIcon className='icon' style={{color:"crimson",backgroundColor:"rgba(255,0,0,0.2"}}/>,
+                icon: <PersonOutlinedIcon className='icon' style={{ color: "crimson", backgroundColor: "rgba(255,0,0,0.2" }} />,
             };
             amount = users.length;
             break;
@@ -35,7 +34,7 @@ const Widget = ({ type }) => {
                 link: "view all orders",
                 linkPath: "/orders",
                 icon: <ShoppingCartOutlined className='icon'
-                style={{color:"goldenrod",backgroundColor:"rgba(218,165,32,0.2"}}
+                    style={{ color: "goldenrod", backgroundColor: "rgba(218,165,32,0.2" }}
                 />,
             };
             amount = orders.length;
@@ -47,7 +46,7 @@ const Widget = ({ type }) => {
                 link: "View net earnings",
                 linkPath: "/stats",
                 icon: <MonetizationOnOutlined className='icon'
-                style={{color:"green",backgroundColor:"rgba(0,128,0,0.2"}}
+                    style={{ color: "green", backgroundColor: "rgba(0,128,0,0.2" }}
                 />,
             };
             break;
@@ -58,7 +57,7 @@ const Widget = ({ type }) => {
                 link: "See details",
                 linkPath: "/stats",
                 icon: <AccountBalanceOutlined className='icon'
-                style={{color:"purple",backgroundColor:"rgba(128,0,128,0.2"}}
+                    style={{ color: "purple", backgroundColor: "rgba(128,0,128,0.2" }}
                 />
             };
             break;
@@ -74,7 +73,7 @@ const Widget = ({ type }) => {
                 {data.linkPath ? (
                     <Link to={data.linkPath} className='link'>{data.link}</Link>
                 ) : (
-                   <span className='link'>{data.link}</span>
+                    <span className='link'>{data.link}</span>
                 )}
             </div>
             <div className="right">

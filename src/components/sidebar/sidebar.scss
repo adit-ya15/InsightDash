@@ -1,13 +1,10 @@
 .sidebar {
     width: 200px;
-    /* Fixed width */
     min-width: 200px;
-    /* Prevent shrinking */
     border-right: 0.5px solid var(--border-color);
     min-height: 100vh;
     background-color: var(--bg-color);
     position: sticky;
-    /* Optional: Keep sidebar visible on scroll */
     top: 0;
 
     .top {

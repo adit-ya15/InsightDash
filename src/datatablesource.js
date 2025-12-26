@@ -29,7 +29,6 @@ export const userColumns = [
     },
 ];
 
-// Helper to generate random date
 const randomDate = (start, end) => {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
 }
@@ -88,8 +87,6 @@ export const productRows = Array.from({ length: 60 }, (_, i) => ({
     status: Math.random() > 0.3 ? "active" : "passive",
 }));
 
-
-// Orders
 export const orderColumns = [
     { field: "id", headerName: "Order ID", width: 100 },
     { field: "product", headerName: "Product", flex: 2, minWidth: 200 },
@@ -122,7 +119,6 @@ export const orderRows = Array.from({ length: 60 }, (_, i) => ({
     status: Math.random() > 0.5 ? "Approved" : "Pending",
 }));
 
-// Delivery
 export const deliveryColumns = [
      { field: "id", headerName: "Tracking ID", width: 120 },
      { field: "product", headerName: "Product", width: 200 },
@@ -150,7 +146,6 @@ export const deliveryRows = Array.from({ length: 60 }, (_, i) => ({
     status: Math.random() > 0.4 ? "In Transit" : "Delivered", 
 }));
 
-// Notifications
 export const notificationColumns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "message", headerName: "Message", width: 400 },
@@ -179,7 +174,6 @@ export const notificationRows = [
     },
 ];
 
-// System Health
 export const systemHealthColumns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "service", headerName: "Service Name", width: 200 },
@@ -205,7 +199,7 @@ export const systemHealthRows = [
         service: "Main Database",
         uptime: "99.99%",
         cpu: "12%",
-        status: "Operational", // Will use default styling
+        status: "Operational",  
     },
     {
         id: 2,
@@ -219,11 +213,10 @@ export const systemHealthRows = [
         service: "Payment Gateway",
         uptime: "98.50%",
         cpu: "45%",
-        status: "Degraded", // Might map to Pending or custom
+        status: "Degraded",
     },
 ];
 
-// Logs
 export const logColumns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "level", headerName: "Level", width: 100 },

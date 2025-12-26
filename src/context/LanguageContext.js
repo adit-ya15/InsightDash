@@ -24,7 +24,6 @@ const translations = {
     
     navbar_search: "Search...",
     navbar_english: "English",
-    navbar_spanish: "Spanish", // Wait, user said Hindi. I will replace Spanish with Hindi or keep consistent with existing code if it had Spanish. User asked for English/Hindi.
     navbar_hindi: "Hindi",
 
     datatable_add_new: "Add New",

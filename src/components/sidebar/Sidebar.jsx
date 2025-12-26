@@ -24,9 +24,8 @@ const Sidebar = () => {
     const { t } = useLanguage();
     const navigate = useNavigate();
     const location = useLocation();
-    
-    // Get the first part of the path, e.g. "users" from "/users/123"
-    const currentPath = location.pathname.split("/")[1]; 
+
+    const currentPath = location.pathname.split("/")[1];
 
     const handleLogout = () => {
         authDispatch({ type: "LOGOUT" });

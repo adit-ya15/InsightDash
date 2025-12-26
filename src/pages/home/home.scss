@@ -1,15 +1,13 @@
 .home {
     display: flex;
-    width: 100%; // Ensure full width
+    width: 100%;
     min-height: 100vh;
 
     .homeContainer {
         flex: 1;
-        /* Take remaining space */
         background-color: var(--bg-color);
         display: flex;
         flex-direction: column;
-        // width: 100vh; // Removed incorrect unit from previous observation
 
         .widgets {
             display: flex;

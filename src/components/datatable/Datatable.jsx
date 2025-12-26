@@ -31,7 +31,6 @@ const Datatable = () => {
   const { data: delivery, handleDelete: deleteDelivery } = useContext(DeliveryContext);
   const { currentUser } = useContext(AuthContext);
 
-  // Define columns and data source based on path
   let columns, data;
 
   switch (path) {
@@ -64,7 +63,7 @@ const Datatable = () => {
       data = logRows;
       break;
     case "messages":
-      columns = []; // Placeholder
+      columns = [];
       data = [];
       break;
     default:
