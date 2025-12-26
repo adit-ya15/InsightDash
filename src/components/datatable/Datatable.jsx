@@ -32,48 +32,40 @@ const Datatable = () => {
   const { currentUser } = useContext(AuthContext);
 
   // Define columns and data source based on path
-  let columns, data, deleteFunc;
+  let columns, data;
 
   switch (path) {
     case "users":
       columns = userColumns;
       data = users;
-      deleteFunc = deleteUser;
       break;
     case "products":
       columns = productColumns;
       data = products;
-      deleteFunc = deleteProduct;
       break;
     case "orders":
       columns = orderColumns;
       data = orders;
-      deleteFunc = deleteOrder;
       break;
     case "delivery":
       columns = deliveryColumns;
       data = delivery;
-      deleteFunc = deleteDelivery;
       break;
     case "notifications":
       columns = notificationColumns;
       data = notificationRows;
-      deleteFunc = () => { };
       break;
     case "system-health":
       columns = systemHealthColumns;
       data = systemHealthRows;
-      deleteFunc = () => { };
       break;
     case "logs":
       columns = logColumns;
       data = logRows;
-      deleteFunc = () => { };
       break;
     case "messages":
       columns = []; // Placeholder
       data = [];
-      deleteFunc = () => { };
       break;
     default:
       columns = [];

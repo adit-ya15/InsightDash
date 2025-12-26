@@ -4,7 +4,7 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import UserHome from "./pages/userHome/UserHome";
-import GenericList from "./pages/generic/GenericList";
+// import GenericList from "./pages/list/GenericList";
 import Stats from "./pages/stats/Stats";
 import Settings from "./pages/settings/Settings";
 import Profile from "./pages/profile/Profile";
@@ -13,7 +13,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs, orderInputs, deliveryInputs } from "./formSource";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-import { AuthContextProvider } from "./context/AuthContext";
+// import { AuthContextProvider } from "./context/AuthContext";
 
 import "./style/global.scss";
 import "./style/dark.scss";

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import "./new.scss"
 import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
-import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+// import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
 import { UserContext } from "../../context/userContext";
 import { ProductContext } from "../../context/ProductContext";
@@ -23,7 +23,7 @@ const New = ({ inputs, title }) => {
   const { handleAdd: addOrder } = useContext(OrderContext);
   const { handleAdd: addDelivery } = useContext(DeliveryContext);
   const { t } = useLanguage();
-  
+
   const location = useLocation();
   const navigate = useNavigate();
   const path = location.pathname.split("/")[1]; // "users", "products", "orders", "delivery"
@@ -44,15 +44,15 @@ const New = ({ inputs, title }) => {
     // Validation
     let isValid = true;
     for (const input of inputs) {
-        if (!data[input.name] || data[input.name].trim() === "") {
-            isValid = false;
-            break;
-        }
+      if (!data[input.name] || data[input.name].trim() === "") {
+        isValid = false;
+        break;
+      }
     }
 
     if (!isValid) {
-        alert("Please fill in all fields");
-        return;
+      alert("Please fill in all fields");
+      return;
     }
 
     let defaultImg = "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg";
@@ -64,7 +64,7 @@ const New = ({ inputs, title }) => {
     const newData = {
       ...data,
       img: file ? URL.createObjectURL(file) : defaultImg,
-      status: data.status || "active" 
+      status: data.status || "active"
     };
 
     if (path === "users") {
@@ -72,11 +72,11 @@ const New = ({ inputs, title }) => {
     } else if (path === "products") {
       addProduct(newData);
     } else if (path === "orders") {
-        addOrder(newData);
+      addOrder(newData);
     } else if (path === "delivery") {
-        addDelivery(newData);
+      addDelivery(newData);
     }
-    
+
     navigate(-1); // Go back
   };
 
@@ -116,7 +116,7 @@ const New = ({ inputs, title }) => {
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} name={input.name} onChange={handleInput}/>
+                  <input type={input.type} placeholder={input.placeholder} name={input.name} onChange={handleInput} />
                 </div>
               ))}
               <button>{t("new_btn_send")}</button>
