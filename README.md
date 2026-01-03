@@ -5,6 +5,12 @@ InsightDash is a **frontend-focused dashboard application** built with React tha
 This project is intentionally designed for **frontend internships**, focusing on UI architecture, state management, and UX decisions rather than backend complexity.
 
 ---
+## TL;DR
+- Role-based admin & user dashboard
+- Frontend-only auth using Context API
+- Protected routes with React Router
+- Clean SaaS-style UI
+- Deployed on Netlify
 
 ## 🚀 Live Demo
 
