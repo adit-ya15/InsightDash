@@ -176,7 +176,7 @@ Orders table with actions and status indicators.
 Frontend Developer  
 
 - GitHub: https://github.com/adit-ya15
-- Portfolio: *(add if available)*
+- Portfolio: https://aditya-frontend-portfolio.vercel.app/
 
 ---
 
